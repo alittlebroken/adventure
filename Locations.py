@@ -56,6 +56,9 @@ class Locations(object):
         print("You pick up the {0}".format(item_key))
         print()
 
+        # return the item picked up to the player
+        return item_key
+
         
     def move_to(self, target):
         ###
