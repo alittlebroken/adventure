@@ -36,6 +36,7 @@ def help():
     print("e or equip <item> <slot> - Equip an item you have stored in your bag to yourself ( Slots: weapon )")
     print("u or unequip <item> <slot> - Unequip an item you have equipped for a particluar slot ( Slots: weapon )")
     print("s or show - Show what items you have equiiped in which slot")
+    print("f or fight <mob> - Fight the specified mob")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Equip an item to the character to be used
@@ -79,6 +80,22 @@ def unequip_item(item, slot):
     # Display a message to the user
     print("You have unequipped {0} and placed it back into your bag".format(item))
     return
+
+def fight_mob(area, mob):
+
+    global running
+
+    # Check the mob exists in the area
+    if world.has_mob(area, mob):
+        # Do we have a weapon to foght the mob with?
+        if player_slots["weapon"] != None:
+            print("You defeated the {0}".format(mob))
+
+            # remove the mob from the area
+            world.remove_mob(area, mob)
+        else:
+            print("You attemped to fight the {0} without a wepaon. You were defeated. Game Over".format(mob))
+            running = False
 
 def show_slots():
 
@@ -151,5 +168,12 @@ while running:
     elif (cmd[0] == "s" or cmd[0] == "show"):
         # Show those slots of yours
         show_slots()
+    elif (cmd[0] == "f" or cmd[0] == "fight"):
+        # check that a monster was specified to fight
+        if len(cmd) <= 1:
+            print("You must specify the monster you wish to attack")
+        else:
+            # Attack the specified monster
+            fight_mob(location, cmd[1])
     else:
         print("Sorry. That command is not recognised.")
