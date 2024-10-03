@@ -6,6 +6,9 @@ running = True
 # Stores the location we are currently in
 location = "start"
 
+# The players bag for any itrms they pick up
+player_bag = []
+
 # Help menu
 def help():
     print("You can perform the following commands:")
