@@ -1,29 +1,3 @@
-class Location(object):
-
-    def __init__(self, name, description):
-
-        self.name = name
-        self.description = description
-        self.visited = False
-
-        self.exits = { }
-
-    def add_location(self, location, direction):
-        self.exits[direction] = location
-
-    def move(self, direction):
-        if direction not in self.exits:
-            print("You are unable to go {0}").format(direction)
-
-        print("You head {0} towards {1}").format(direction, self.exits[direction].name)
-        print()
-        print(self.exits[direction].description)
-
-        if self.visited:
-            print("The {1} looks just as it did before").format(self.exits[direction].name)
-
-        self.visited = True
-
 class Locations(object):
 
     def __init__(self):
@@ -35,7 +9,7 @@ class Locations(object):
         self.area = "start"
 
 
-    def add(self, key, title, desc):
+    def add(self, key, title, desc = []):
 
         self.areas[key] = dict( name = title, description = desc, exits = {})
 
@@ -74,15 +48,16 @@ class Locations(object):
         
     def describe(self):
 
-        print(self.areas[self.area]["description"])
+        for line in self.areas[self.area]["description"]:
+            print(line)
 
 
 # Create an instance of the Locations class
 world = Locations()
 
 # Populate the world with locations
-world.add("start", "Dungeon Entrance", "The start of your journey for fame and riches. What adventure awaits you?")
-world.add("cavern", "Cavern", "You step foot into a very large cavern")
+world.add("start", "Dungeon Entrance", ["The start of your journey for fame and riches. What adventure awaits you?"])
+world.add("cavern", "Cavern", ["You step foot into a very large cavern"])
 
 # Add connections between the locations
 world.add_connection("start", "north", "cavern")
