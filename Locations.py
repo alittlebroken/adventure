@@ -76,7 +76,7 @@ class Locations(object):
             # Display the main text for the area
             print("You enter a {0}".format(self.areas[self.area]["name"]))
             self.describe()
-            return
+            return self.area
         
     def describe(self):
 
