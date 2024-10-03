@@ -6,7 +6,7 @@ running = True
 # Stores the location we are currently in
 location = "start"
 
-# The players bag for any itrms they pick up
+# The players bag for any items they pick up
 player_bag = []
 
 # Help menu
