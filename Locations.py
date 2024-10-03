@@ -11,7 +11,7 @@ class Locations(object):
 
     def add(self, key, title, desc = []):
 
-        self.areas[key] = dict( name = title, description = desc, exits = {}, items = [])
+        self.areas[key] = dict( name = title, description = desc, exits = {}, items = [], mobs = [] )
 
     def add_connection(self, target_key, dir, source_key):
 
@@ -59,7 +59,43 @@ class Locations(object):
         # return the item picked up to the player
         return item_key
 
+    def add_mob(self, key, mob):
+
+        # Ensure an item is passed to the method
+        if not mob:
+            print("You must supply a mob to add to this location")
+            return
+
+        # Ensure the location is valid
+        if key not in self.areas:
+            print("You must supply a vlaid area to add a mob to")
+            return
         
+        # Check if a mob is already in this area
+        if len(self.areas[key]["mobs"]) > 0:
+            print("This area already has a mob asigned to it. You can't assign another.")
+            return
+        
+        # Add the item to the location
+        self.areas[key]["mobs"].append(mob)
+        return
+    
+    def remove_mob(self, key, mob):
+
+        # Ensure a mob is passed to the method
+        if not mob:
+            print("You must supply a mob to remove from this location")
+            return
+
+        # Ensure the location is valid
+        if key not in self.areas:
+            print("You must supply a vlaid area to add a mob to")
+            return
+        
+        # Remove the mob from the location
+        self.areas[key]["mobs"].remove(mob)
+        return
+
     def move_to(self, target):
         ###
         #   Move the player to a new location
@@ -92,6 +128,11 @@ class Locations(object):
             print(line)
 
         print()
+
+        # Are there any mobs we can fight?
+        if len(self.areas[self.area]["mobs"]) > 0:
+            print("You have stumbled upon a {0}".format(self.areas[self.area]["mobs"]))
+            print()
 
         # Display any items this location has
         if len(self.areas[self.area]["items"]) > 0:
