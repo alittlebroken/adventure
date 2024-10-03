@@ -47,6 +47,8 @@ while running:
         # Describe the current location we are in
         world.describe()
     elif (cmd[0] == "t" or cmd[0] == "take"):
-        world.take_item(cmd[1])
+        item = world.take_item(cmd[1])
+        # place the item in the players bag
+        player_bag.append(item)
     else:
         print("Sorry. That command is not recognised.")

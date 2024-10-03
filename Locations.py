@@ -53,7 +53,7 @@ class Locations(object):
         
         # Remove the item from the location
         self.areas[self.area]["items"].remove(item_key)
-        print("You pick up the {0}".format(item_key))
+        print("You pick up the {0} and place it in your bag.".format(item_key))
         print()
 
         # return the item picked up to the player
