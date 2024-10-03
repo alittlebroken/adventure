@@ -10,7 +10,17 @@ location = "start"
 player_bag = []
 
 # The slots for a player
-player_slots = { "weapon": None }
+player_slots = { 
+    "weapon": None,
+    "head": None,
+    "shoulders": None,
+    "chest": None,
+    "hands": None,
+    "belt": None,
+    "legs": None,
+    "feet": None,
+    "back": None 
+}
 
 # Help menu
 def help():
