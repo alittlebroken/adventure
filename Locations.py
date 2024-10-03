@@ -65,23 +65,32 @@ class Locations(object):
         
     def describe(self):
 
+        # Display location name
         print()
         print("=" * len(self.areas[self.area]["name"]))
         print(self.areas[self.area]["name"])
         print("=" * len(self.areas[self.area]["name"]))
         print()
 
+        # Display the main description
         for line in self.areas[self.area]["description"]:
             print(line)
 
         print()
 
+        # Display any items this location has
+        if len(self.areas[self.area]["items"]) > 0:
+            print("Items you see:")
+            for item in self.areas[self.area]["items"]:
+                print(item)
+            print()
+
+        # Check the exits this location has
         if len(self.areas[self.area]["exits"]) > 0:
             print("You can go:")
             for exit in self.areas[self.area]["exits"]:
                 print(exit)
-
-        print()
+            print()
 
 
 # Create an instance of the Locations class
