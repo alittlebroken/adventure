@@ -93,7 +93,7 @@ class Locations(object):
             return
         
         # Remove the mob from the location
-        self.areas[key]["mobs"].remove(mob)
+        self.areas[key]["mobs"].remove({ "name": mob })
         return
 
     def has_mob(self, key, mob):
