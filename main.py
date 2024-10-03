@@ -19,7 +19,7 @@ def help():
     print("l or look - Describe the area you are in")
     print("t or take <item> - Take an item that the area has")
     print("i or inv or inventory - Show the items you have in your bag")
-    print("d or drop <item< - Drop an item to the greound")
+    print("d or drop <item< - Drop an item to the ground")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Keep looping until the game is own, lost or quit
