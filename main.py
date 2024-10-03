@@ -25,6 +25,7 @@ def help():
     print("d or drop <item> - Drop an item to the ground")
     print("e or equip <item> <slot> - Equip an item you have stored in your bag to yourself ( Slots: weapon )")
     print("u or unequip <item> <slot> - Unequip an item you have equipped for a particluar slot ( Slots: weapon )")
+    print("s or show - Show what items you have equiiped in which slot")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Equip an item to the character to be used
@@ -67,6 +68,15 @@ def unequip_item(item, slot):
 
     # Display a message to the user
     print("You have unequipped {0} and placed it back into your bag".format(item))
+    return
+
+def show_slots():
+
+    for index, (key, value) in enumerate(player_slots.items()):
+        if value != None:
+            print("{1} is equipped in your {0} slot.".format(key, value))
+    
+    print()
     return
 
 # Keep looping until the game is own, lost or quit
@@ -128,6 +138,8 @@ while running:
     elif (cmd[0] == "u" or cmd[0] == "unequip"):
         # Unequip the item
         unequip_item(cmd[1], cmd[2])
-
+    elif (cmd[0] == "s" or cmd[0] == "show"):
+        # Show those slots of yours
+        show_slots()
     else:
         print("Sorry. That command is not recognised.")
