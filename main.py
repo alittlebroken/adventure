@@ -17,8 +17,9 @@ def help():
     print("help - Display this menu")
     print()
     print("l or look - Describe the area you are in")
-    print("t or take  - Take an item that the area has")
+    print("t or take <item> - Take an item that the area has")
     print("i or inv or inventory - Show the items you have in your bag")
+    print("d or drop <item< - Drop an item to the greound")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Keep looping until the game is own, lost or quit
@@ -59,5 +60,22 @@ while running:
             print()
         else:
             print("You currently are carrying no items in your bag.")
+    elif (cmd[0] == "d" or cmd[0] == "drop"):
+        
+        # Check if an item has been specified
+        if len(cmd) <= 1:
+            print("You must supply the name of an item you wish to drop")
+        else:
+            # Are we carrying that item in the bag?
+            if cmd[1] not in player_bag:
+                print("You are not carrying that item so you can't drop it")
+            else:
+                # Remove the item from the players bag
+                player_bag.remove(cmd[1])
+
+                # Add the item to the list of items the area has
+                world.add_item(location, cmd[1])
+
+        
     else:
         print("Sorry. That command is not recognised.")
