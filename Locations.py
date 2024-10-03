@@ -43,7 +43,19 @@ class Locations(object):
         # Add the item to the location
         self.areas[key]["items"].append(item)
         return
+
+    def take_item(self, item_key):
+
+        # Check to see if the current area has an item matching the key passed in
+        if item_key not in self.areas[self.area]["items"]:
+            print("This area does not have an item called {0}".format(item_key))
+            return
         
+        # Remove the item from the location
+        self.areas[self.area]["items"].remove(item_key)
+        print("You pick up the {0}".format(item_key))
+        print()
+
         
     def move_to(self, target):
         ###

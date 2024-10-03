@@ -14,6 +14,7 @@ def help():
     print("help - Display this menu")
     print()
     print("l or look - Describe the area you are in")
+    print("t or take  - Take an item that the area has")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Keep looping until the game is own, lost or quit
@@ -42,5 +43,7 @@ while running:
     elif (cmd[0] == "l" or cmd[0] == "look"):
         # Describe the current location we are in
         world.describe()
+    elif (cmd[0] == "t" or cmd[0] == "take"):
+        world.take_item(cmd[1])
     else:
         print("Sorry. That command is not recognised.")
