@@ -12,6 +12,8 @@ def help():
     print()
     print("q or quit or exit - Leave the game")
     print("help - Display this menu")
+    print()
+    print("l or look - Describe the area you are in")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Keep looping until the game is own, lost or quit
@@ -37,5 +39,8 @@ while running:
             world.move_to(cmd[1])
     elif (cmd[0] == "help" or cmd[0] == "h"):
         help()
+    elif (cmd[0] == "l" or cmd[0] == "look"):
+        # Describe the current location we are in
+        world.describe()
     else:
         print("Sorry. That command is not recognised.")
