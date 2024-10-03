@@ -131,7 +131,9 @@ class Locations(object):
 
         # Are there any mobs we can fight?
         if len(self.areas[self.area]["mobs"]) > 0:
-            print("You have stumbled upon a {0}".format(self.areas[self.area]["mobs"]))
+            print("Monsters you see:")
+            for mob in self.areas[self.area]["mobs"]:
+                print(mob)
             print()
 
         # Display any items this location has
@@ -160,6 +162,9 @@ world.add("cavern", "Cavern", ["You step foot into a very large cavern"])
 world.add_item("start", "key")
 world.add_item("cavern", "gold")
 world.add_item("cavern", "dagger")
+
+# Add some mobs
+world.add_mob("cavern", "skeleton")
 
 # Add connections between the locations
 world.add_connection("start", "north", "cavern")
