@@ -24,16 +24,13 @@ def help():
     print("i or inv or inventory - Show the items you have in your bag")
     print("d or drop <item> - Drop an item to the ground")
     print("e or equip <item> <slot> - Equip an item you have stored in your bag to yourself ( Slots: weapon )")
+    print("u or unequip <item> <slot> - Unequip an item you have equipped for a particluar slot ( Slots: weapon )")
     print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
 
 # Equip an item to the character to be used
 def equip_item(item, slot):
 
-    print(player_slots)
-    print(item)
-    print(slot)
-
-    # Check if wa have the item first
+    # Check if we have the item first
     if item not in player_bag:
         print("You can only equip an item you have placed in your bag")
         return
@@ -48,6 +45,28 @@ def equip_item(item, slot):
 
     # remove the item from your bag
     player_bag.remove(item)
+    return
+
+def unequip_item(item, slot):
+
+    # Check if the slot for the player is available
+    if slot not in player_slots:
+        print("The player does not have a slot matching that description")
+        return
+    
+    # Check if the slot has that item equipped
+    if player_slots[slot] != item:
+        print("You do no have that item equipped in that slot")
+        return
+    
+    # Remove the item from the slot
+    player_slots[slot] = None
+
+    # Place the item back into the players bag
+    player_bag.append(item)
+
+    # Display a message to the user
+    print("You have unequipped {0} and placed it back into your bag".format(item))
     return
 
 # Keep looping until the game is own, lost or quit
@@ -106,6 +125,9 @@ while running:
     elif (cmd[0] == "e" or cmd[0] == "equip"):
         # Equip the item
         equip_item(cmd[1], cmd[2])
+    elif (cmd[0] == "u" or cmd[0] == "unequip"):
+        # Unequip the item
+        unequip_item(cmd[1], cmd[2])
 
     else:
         print("Sorry. That command is not recognised.")
