@@ -96,6 +96,23 @@ class Locations(object):
         self.areas[key]["mobs"].remove(mob)
         return
 
+    def has_mob(self, key, mob):
+        # Determines if a area has the specified mob, true if it does false otherwise
+
+        # Is the area valid
+        if key not in self.areas:
+            print("You must input a valid area")
+            return False
+        
+        # Is the mob valid?
+        print()
+        if self.areas[key]["mobs"][0]["name"] != mob:
+            print("{0} does not exist at this location.".format(mob))
+            return False
+        
+        # The mob exists, return true
+        return True
+
     def move_to(self, target):
         ###
         #   Move the player to a new location
