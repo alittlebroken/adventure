@@ -42,7 +42,7 @@ while running:
             print("You must specify a location to move to")
         else:
             # Attempt to move to the desired location
-            world.move_to(cmd[1])
+            location = world.move_to(cmd[1])
     elif (cmd[0] == "help" or cmd[0] == "h"):
         help()
     elif (cmd[0] == "l" or cmd[0] == "look"):
