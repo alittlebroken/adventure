@@ -1,5 +1,16 @@
 from Locations import *
 
+# TODO
+# - Add a welcome screen
+# - Add game title to each loop
+# - Ability to collect and spend money
+# - Add more rooms
+# - Add more mobs
+# - Add more items
+# - Create a game class and object
+# - Create a player class and object
+# - Move the commands list from if statements to a switch
+
 # Sets the game running
 running = True
 
