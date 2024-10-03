@@ -11,7 +11,7 @@ class Locations(object):
 
     def add(self, key, title, desc = []):
 
-        self.areas[key] = dict( name = title, description = desc, exits = {})
+        self.areas[key] = dict( name = title, description = desc, exits = {}, items = [])
 
     def add_connection(self, target_key, dir, source_key):
 
@@ -27,6 +27,23 @@ class Locations(object):
         # Add a connection between the target and source locations
         self.areas[target_key]["exits"][dir] = source_key
         return 
+    
+    def add_item(self, key, item):
+
+        # Ensure an item is passed to the method
+        if not item:
+            print("You must supply an item to add to this location")
+            return
+
+        # Ensure the location is valid
+        if key not in self.areas:
+            print("You must supply a vlaid area to add an item to")
+            return
+        
+        # Add the item to the location
+        self.areas[key]["items"].append(item)
+        return
+        
         
     def move_to(self, target):
         ###
@@ -73,6 +90,11 @@ world = Locations()
 # Populate the world with locations
 world.add("start", "Dungeon Entrance", ["The start of your journey for fame and riches.", "What adventure awaits you?"])
 world.add("cavern", "Cavern", ["You step foot into a very large cavern"])
+
+# Add items to a location
+world.add_item("start", "key")
+world.add_item("cavern", "gold")
+world.add_item("cavern", "dagger")
 
 # Add connections between the locations
 world.add_connection("start", "north", "cavern")
