@@ -2,7 +2,7 @@ from Locations import *
 
 # TODO
 # - Add a welcome screen
-# - Add game title to each loop
+# - Add game title to each loop [DONE]
 # - Ability to collect and spend money
 # - Add more rooms
 # - Add more mobs
@@ -10,6 +10,9 @@ from Locations import *
 # - Create a game class and object
 # - Create a player class and object
 # - Move the commands list from if statements to a switch
+
+# Name of the APP
+appName = "Caverns of Mysteria"
 
 # Sets the game running
 running = True
@@ -116,6 +119,14 @@ def show_slots():
     
     print()
     return
+
+# Display the intro text
+print()
+print("*" * len(appName))
+print(appName)
+print("*" * len(appName))
+print()
+
 
 # Keep looping until the game is own, lost or quit
 while running:
