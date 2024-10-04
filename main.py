@@ -1,8 +1,6 @@
 from Locations import *
 
 # TODO
-# - Add a welcome screen
-# - Add game title to each loop [DONE]
 # - Ability to collect and spend money
 # - Add more rooms
 # - Add more mobs
