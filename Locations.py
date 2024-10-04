@@ -172,7 +172,13 @@ class Locations(object):
 world = Locations()
 
 # Populate the world with locations
-world.add("start", "Dungeon Entrance", ["The start of your journey for fame and riches.", "What adventure awaits you?"])
+world.add("start", "Cavern Entrance", [
+    "As the dust starts to settle, you see there is no way to unblock the entrance.",
+    "",
+    "There is now just the one exit going north."
+    ])
+
+
 world.add("cavern", "Cavern", ["You step foot into a very large cavern"])
 
 # Add items to a location
