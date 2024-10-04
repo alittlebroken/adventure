@@ -13,6 +13,13 @@ from Locations import *
 
 # Name of the APP
 appName = "Caverns of Mysteria"
+introText = [
+    "You are an intrepid adventurer in search of the fabled treasure of Mysteria",
+    "Many adventurers before you have tried and failed to recover it, will you be any different?",
+    " ",
+    "As you step foot into the caverns entrance, you hear a rumble and the door is covered by falling rocks.",
+    "It seems the only way is forward. Onwards to glory or death."
+]
 
 # Sets the game running
 running = True
@@ -127,6 +134,9 @@ print(appName)
 print("*" * len(appName))
 print()
 
+for line in introText:
+    print(line)
+print()
 
 # Keep looping until the game is own, lost or quit
 while running:
