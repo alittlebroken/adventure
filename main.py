@@ -100,6 +100,10 @@ def process_cmd(command):
                 # Attack the specified monster
                 fight_mob(location, cmds[1])
 
+        case "search":
+            # Search the area for any goodies
+            world.search()
+
         case _:
             print("That is not a recognised command. Type help for a listing of the commands")
             return
@@ -143,15 +147,16 @@ def help():
     print("q or quit or exit - Leave the game")
     print("help - Display this menu")
     print()
-    print("l or look - Describe the area you are in")
-    print("t or take <item> - Take an item that the area has")
-    print("i or inv or inventory - Show the items you have in your bag")
-    print("d or drop <item> - Drop an item to the ground")
-    print("e or equip <item> <slot> - Equip an item you have stored in your bag to yourself ( Slots: weapon )")
-    print("u or unequip <item> <slot> - Unequip an item you have equipped for a particluar slot ( Slots: weapon )")
-    print("s or show - Show what items you have equiiped in which slot")
-    print("f or fight <mob> - Fight the specified mob")
-    print("g or go <direction> - Travel in the direction given ( Can be one of north, south, east or west )")
+    print("look - Describe the area you are in")
+    print("take <item> - Take an item that the area has")
+    print("inventory - Show the items you have in your bag")
+    print("drop <item> - Drop an item to the ground")
+    print("equip <item> <slot> - Equip an item you have stored in your bag to yourself ( Slots: weapon )")
+    print("unequip <item> <slot> - Unequip an item you have equipped for a particluar slot ( Slots: weapon )")
+    print("show - Show what items you have equiiped in which slot")
+    print("fight <mob> - Fight the specified mob")
+    print("search - Look for loot in the location you are in")
+    print()
 
 # Equip an item to the character to be used
 def equip_item(item, slot):

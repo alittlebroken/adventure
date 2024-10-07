@@ -153,6 +153,16 @@ class Locations(object):
                 print(mob["name"])
             print()
 
+    def search(self):
+        
+        # Performs a search of the rook you are in for any goodies
+        if len(self.areas[self.area]["items"]) > 0:
+            print("You search the area and find: ")
+            for item in self.areas[self.area]["items"]:
+                print(item)
+        else:
+            print("You did not find anything")
+        print()
 
 # Create an instance of the Locations class
 world = Locations()
