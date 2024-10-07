@@ -8,6 +8,101 @@ from Locations import *
 # - Create a game class and object
 # - Create a player class and object
 # - Move the commands list from if statements to a switch
+# Ideas ( Inspiration from Zork ):
+# - to move in a direction just say the direction
+# - use look to describe the room you are in
+# - Attack things with the command attack <mob> with <weapon> ( Have no slots, just has to be in your bag )
+# - To give an item to something use give <item> to <something>
+# - Other directions aside form north, south, east and west can be up, down
+# - Don't list what objects or exits there are on screen, have the player gues by using commands like north or search or look etc
+# - A room can have objects which can be interacted with, perhaps a new room etc or a chest with loot inside
+# - Set the command prompt to just >
+
+# Process commands entered by the player
+def process_cmd(command):
+    
+    global running, location
+
+    # Split out the cmd passed in by the space character
+    cmds = command.split(" ")
+
+    # Perform the correct action based on the first command entered
+    # Each case will need to access the other parts of the commands ( if provided )
+    # to perform properly
+    match cmds[0]:
+        case "north":
+            location = world.move_to(cmds[0])
+            return
+        case "east":
+            location = world.move_to(cmds[0])
+            return
+        case "south":
+            location = world.move_to(cmds[0])
+            return
+        case "west":
+            location = world.move_to(cmds[0])
+            return
+        case "help":
+            help()
+            return
+        case "quit":
+            print("Thanks for playing, bye.")
+            running = False
+            return
+        case "look":
+            world.describe()
+            return
+        case "take":
+            world.take_item(cmds[1])
+            player_bag.append(cmds[1])
+            return
+        case "inventory":
+            if len(player_bag) > 0:
+                print("You are carrying the following items:")
+                # Dispay the contents
+                for item in player_bag:
+                    print(item)
+                print()
+            else:
+                print("You currently have no items in your bag.")
+            return
+        case "drop":
+            
+             # Check if an item has been specified
+            if len(cmds) <= 1:
+                print("You must supply the name of an item you wish to drop")
+            else:
+                # Are we carrying that item in the bag?
+                if cmds[1] not in player_bag:
+                    print("You are not carrying that item so you can't drop it")
+                else:
+                    # Remove the item from the players bag
+                    player_bag.remove(cmds[1])
+
+                    # Add the item to the list of items the area has
+                    world.add_item(location, cmds[1])
+
+        case "equip":
+            # Equip the item
+            equip_item(cmds[1], cmds[2])
+        case "unequip":
+            # Unequip the item
+            unequip_item(cmds[1], cmds[2])
+        case "show":
+             # Show those slots of yours
+            show_slots()
+        case "fight":
+            
+            # check that a monster was specified to fight
+            if len(cmds) <= 1:
+                print("You must specify the monster you wish to attack")
+            else:
+                # Attack the specified monster
+                fight_mob(location, cmds[1])
+
+        case _:
+            print("That is not a recognised command. Type help for a listing of the commands")
+            return
 
 # Name of the APP
 appName = "Caverns of Mysteria"
@@ -142,68 +237,4 @@ while running:
     # Get any inut from the player
     command = input("What would you like to do? > ")
 
-    # split the command out for easier parsing
-    cmd = command.split(' ')
-
-    # Check what command was inout
-    if (cmd[0] == "q" or cmd[0] == "quit" or cmd[0] == "exit"):
-        print("Thank you for playing the game. Bye")
-        running = False
-    elif (cmd[0] == "g" or cmd[0] == "go"):
-
-        # Check we have specified a location to move to
-        if len(cmd) <= 1:
-            print("You must specify a location to move to")
-        else:
-            # Attempt to move to the desired location
-            location = world.move_to(cmd[1])
-    elif (cmd[0] == "help" or cmd[0] == "h"):
-        help()
-    elif (cmd[0] == "l" or cmd[0] == "look"):
-        # Describe the current location we are in
-        world.describe()
-    elif (cmd[0] == "t" or cmd[0] == "take"):
-        item = world.take_item(cmd[1])
-        # place the item in the players bag
-        player_bag.append(item)
-    elif (cmd[0] == "i" or cmd[0] == "inv" or cmd[0] == "inventory"):
-        if len(player_bag) > 0:
-            print("You are carrying the following items:")
-            for item in player_bag:
-                print(item)
-            print()
-        else:
-            print("You currently are carrying no items in your bag.")
-    elif (cmd[0] == "d" or cmd[0] == "drop"):
-        
-        # Check if an item has been specified
-        if len(cmd) <= 1:
-            print("You must supply the name of an item you wish to drop")
-        else:
-            # Are we carrying that item in the bag?
-            if cmd[1] not in player_bag:
-                print("You are not carrying that item so you can't drop it")
-            else:
-                # Remove the item from the players bag
-                player_bag.remove(cmd[1])
-
-                # Add the item to the list of items the area has
-                world.add_item(location, cmd[1])
-    elif (cmd[0] == "e" or cmd[0] == "equip"):
-        # Equip the item
-        equip_item(cmd[1], cmd[2])
-    elif (cmd[0] == "u" or cmd[0] == "unequip"):
-        # Unequip the item
-        unequip_item(cmd[1], cmd[2])
-    elif (cmd[0] == "s" or cmd[0] == "show"):
-        # Show those slots of yours
-        show_slots()
-    elif (cmd[0] == "f" or cmd[0] == "fight"):
-        # check that a monster was specified to fight
-        if len(cmd) <= 1:
-            print("You must specify the monster you wish to attack")
-        else:
-            # Attack the specified monster
-            fight_mob(location, cmd[1])
-    else:
-        print("Sorry. That command is not recognised.")
+    process_cmd(command)
