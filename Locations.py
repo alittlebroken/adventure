@@ -153,20 +153,6 @@ class Locations(object):
                 print(mob["name"])
             print()
 
-        # Display any items this location has
-        if len(self.areas[self.area]["items"]) > 0:
-            print("Items you see:")
-            for item in self.areas[self.area]["items"]:
-                print(item)
-            print()
-
-        # Check the exits this location has
-        if len(self.areas[self.area]["exits"]) > 0:
-            print("You can go:")
-            for exit in self.areas[self.area]["exits"]:
-                print(exit)
-            print()
-
 
 # Create an instance of the Locations class
 world = Locations()
