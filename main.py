@@ -7,16 +7,13 @@ from Locations import *
 # - Add more items
 # - Create a game class and object
 # - Create a player class and object
-# - Move the commands list from if statements to a switch [DONE]
+# - Create a mob class and objects
+# - Create a item class and objects
 # Ideas ( Inspiration from Zork ):
-# - to move in a direction just say the direction [DONE]
-# - use look to describe the room you are in
 # - Attack things with the command attack <mob> with <weapon> ( Have no slots, just has to be in your bag )
 # - To give an item to something use give <item> to <something>
-# - Other directions aside form north, south, east and west can be up, down
-# - Don't list what objects or exits there are on screen, have the player gues by using commands like north or search or look etc
+# - Other directions aside from north, south, east and west can be up, down
 # - A room can have objects which can be interacted with, perhaps a new room etc or a chest with loot inside
-# - Set the command prompt to just > [DONE]
 
 # Process commands entered by the player
 def process_cmd(command):
@@ -53,8 +50,7 @@ def process_cmd(command):
             world.describe()
             return
         case "take":
-            world.take_item(cmds[1])
-            player_bag.append(cmds[1])
+            player_bag.append(world.take_item(cmds[1]))
             return
         case "inventory":
             if len(player_bag) > 0:
@@ -68,19 +64,23 @@ def process_cmd(command):
             return
         case "drop":
             
+            print(player_bag)
+
              # Check if an item has been specified
             if len(cmds) <= 1:
                 print("You must supply the name of an item you wish to drop")
             else:
                 # Are we carrying that item in the bag?
-                if cmds[1] not in player_bag:
-                    print("You are not carrying that item so you can't drop it")
-                else:
-                    # Remove the item from the players bag
-                    player_bag.remove(cmds[1])
-
-                    # Add the item to the list of items the area has
-                    world.add_item(location, cmds[1])
+                for item in player_bag:
+                    if item.name == cmds[1]:
+                        # Remove the item
+                        player_bag.remove(item)
+                        # Add to the areas list
+                        world.add_item(location, item)
+                        return
+                    else:
+                        print("You are not carrying that item so you can't drop it")
+                        return
 
         case "equip":
             # Equip the item
