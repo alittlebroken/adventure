@@ -57,14 +57,12 @@ def process_cmd(command):
                 print("You are carrying the following items:")
                 # Dispay the contents
                 for item in player_bag:
-                    print(item)
+                    print(item.name)
                 print()
             else:
                 print("You currently have no items in your bag.")
             return
         case "drop":
-            
-            print(player_bag)
 
              # Check if an item has been specified
             if len(cmds) <= 1:
