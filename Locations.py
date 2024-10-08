@@ -51,6 +51,7 @@ class Locations(object):
 
         # Check if the item being taken exists in the area being searched
         for item in self.areas[self.area]["items"]:
+            
             if item.name == item_key:
                 # Remove the item from the area
                 self.areas[self.area]["items"].remove(item)
@@ -58,9 +59,6 @@ class Locations(object):
                 print()
                 # Give the item to the player
                 return item
-            else:
-                print("This area does not have an item called {0}".format(item_key))
-                return
 
     def add_mob(self, key, mob):
 
