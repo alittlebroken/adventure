@@ -1,3 +1,5 @@
+from Item import *
+
 class Locations(object):
 
     def __init__(self):
@@ -159,7 +161,7 @@ class Locations(object):
         if len(self.areas[self.area]["items"]) > 0:
             print("You search the area and find: ")
             for item in self.areas[self.area]["items"]:
-                print(item)
+                print(item.name)
         else:
             print("You did not find anything")
         print()
@@ -178,9 +180,9 @@ world.add("start", "Cavern Entrance", [
 world.add("cavern", "Cavern", ["You step foot into a very large cavern"])
 
 # Add items to a location
-world.add_item("start", "key")
-world.add_item("cavern", "gold")
-world.add_item("cavern", "dagger")
+world.add_item("start", key)
+world.add_item("cavern", gold)
+world.add_item("cavern", dagger)
 
 # Add some mobs
 world.add_mob("cavern", { "name": "skeleton" })
