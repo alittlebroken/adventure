@@ -37,4 +37,12 @@ class Bag(object):
         else:
             print("You don't have that item in your bag to remove.")
             return False
+        
+    # Displays the contents of the bag
+    def display(self):
+
+        print("You are carrying the following items:")
+        print()
+        for item in self.items:
+            print(item.name)
 
