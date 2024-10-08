@@ -107,6 +107,19 @@ class Locations(object):
             print("You must input a valid area")
             return False
         
+        # Check we have mobs to check against
+        if len(self.areas[key]["mobs"]) > 0:
+
+            # Check each mob and see if it matches the passed in mob name
+            for areaMob in self.areas[key]["mobs"]:
+                if areaMob.name == mob:
+                    return True
+                else:
+                    return False
+
+        else:
+            return False
+
         # Is the mob valid?
         print()
         if self.areas[key]["mobs"] != mob:
