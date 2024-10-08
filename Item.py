@@ -12,3 +12,8 @@ class Item(object):
         for line in self.description:
             print(line)
         print()
+
+# Create some Items
+dagger = Item("dagger", "A simple silver dagger", "weapon", 1)
+gold = Item("gold", "A single gold coin", "coin", 1)
+key = Item("key", "A rusty old key. Wonder what lock it opens?", "quest", 0)
