@@ -8,12 +8,41 @@ from Locations import *
 # - Create a game class and object
 # - Create a player class and object
 # - Create a mob class and objects
-# - Create a item class and objects
 # Ideas ( Inspiration from Zork ):
 # - Attack things with the command attack <mob> with <weapon> ( Have no slots, just has to be in your bag )
 # - To give an item to something use give <item> to <something>
 # - Other directions aside from north, south, east and west can be up, down
 # - A room can have objects which can be interacted with, perhaps a new room etc or a chest with loot inside
+
+# Attacks the specified monster
+def attack(item, mob):
+    
+    # Check the weapon actually exists
+    if(isItemInBag(item)):
+        # Is the item a weapon?
+        if item.type == "weapon":
+            print("You successfully attack {0} with a {1}".format(mob.name, item.name))
+            print("The {0} keels over. You are victorius.".format(mob.name))
+            # Add in the actual code for the attack here
+            world.remove_mob(mob)
+            return
+        else:
+            print("You can't attack with a {0}".format(item.name))
+            return
+    
+
+# Check the players bag to see if an item Exists
+def isItemInBag(item):
+
+    # Do we have any items in the players bag?
+    if len(player_bag) > 0:
+        for bagItem in player_bag:
+            if bagItem == item:
+                return True
+            else:
+                return False
+    else:
+        return False
 
 # Process commands entered by the player
 def process_cmd(command):
@@ -198,20 +227,20 @@ def unequip_item(item, slot):
     print("You have unequipped {0} and placed it back into your bag".format(item))
     return
 
-def fight_mob(area, mob):
+def fight_mob(area, mob, item):
 
     global running
 
     # Check the mob exists in the area
     if world.has_mob(area, mob):
-        # Do we have a weapon to foght the mob with?
+
         if player_slots["weapon"] != None:
             print("You defeated the {0}".format(mob))
 
             # remove the mob from the area
             world.remove_mob(area, mob)
         else:
-            print("You attemped to fight the {0} without a wepaon. You were defeated. Game Over".format(mob))
+            print("You attemped to fight the {0} without a weapon. You were defeated. Game Over".format(mob))
             running = False
 
 def show_slots():
