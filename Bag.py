@@ -2,6 +2,7 @@
 class Bag(object):
     def __init__(self):
         self.items = []
+        self.size = 0
 
     # Checks if an item is in the bag
     def exists(self, item):
@@ -22,6 +23,7 @@ class Bag(object):
             return
         else:
             self.items.append(item)
+            self.size += 1
             return
         
     # Removes an item from the bag
@@ -30,6 +32,7 @@ class Bag(object):
         # Check to ensure the item is not already in the bag
         if self.inBag(item):
             self.items.remove(item)
+            self.size -= 1
             return item
         else:
             print("You don't have that item in your bag to remove.")
