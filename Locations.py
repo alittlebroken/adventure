@@ -1,4 +1,5 @@
 from Item import *
+from Mob import *
 
 class Locations(object):
 
@@ -91,11 +92,11 @@ class Locations(object):
 
         # Ensure the location is valid
         if key not in self.areas:
-            print("You must supply a vlaid area to add a mob to")
+            print("You must supply a vlaid area to remove a mob from")
             return
         
         # Remove the mob from the location
-        self.areas[key]["mobs"].remove({ "name": mob })
+        self.areas[key]["mobs"].remove(mob)
         return
 
     def has_mob(self, key, mob):
@@ -108,8 +109,8 @@ class Locations(object):
         
         # Is the mob valid?
         print()
-        if self.areas[key]["mobs"][0]["name"] != mob:
-            print("{0} does not exist at this location.".format(mob))
+        if self.areas[key]["mobs"] != mob:
+            print("{0} does not exist at this location.".format(mob.name))
             return False
         
         # The mob exists, return true
@@ -152,7 +153,7 @@ class Locations(object):
         if len(self.areas[self.area]["mobs"]) > 0:
             print("Monsters you see:")
             for mob in self.areas[self.area]["mobs"]:
-                print(mob["name"])
+                print(mob.name)
             print()
 
     def search(self):
@@ -185,7 +186,7 @@ world.add_item("cavern", gold)
 world.add_item("cavern", dagger)
 
 # Add some mobs
-world.add_mob("cavern", { "name": "skeleton" })
+world.add_mob("cavern", skeleton)
 
 # Add connections between the locations
 world.add_connection("start", "north", "cavern")
