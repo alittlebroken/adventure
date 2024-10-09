@@ -183,14 +183,10 @@ def help():
 # Equip an item to the character to be used
 def equip_item(item, slot):
 
-    print(item)
-    print(slot)
-
     # Check if we have the item first
     if not bag.contains(item):
         print("You can only equip an item you have placed in your bag")
         return
-    
     
     # Check if the slot for the player is available
     if slot not in player_slots:
@@ -246,7 +242,7 @@ def show_slots():
 
     for index, (key, value) in enumerate(player_slots.items()):
         if value != None:
-            print("{1} is equipped in your {0} slot.".format(key, value))
+            print("{1} is equipped in your {0} slot.".format(key, value.name))
     
     print()
     return
