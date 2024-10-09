@@ -110,7 +110,7 @@ class Locations(object):
 
             # Check each mob and see if it matches the passed in mob name
             for areaMob in self.areas[key]["mobs"]:
-                if areaMob.name == mob:
+                if areaMob.name.lower() == mob:
                     return True
                 else:
                     return False
