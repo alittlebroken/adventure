@@ -11,7 +11,6 @@ class Locations(object):
         # Area we are currently in
         self.area = "start"
 
-
     def add(self, key, title, desc = []):
 
         self.areas[key] = dict( name = title, description = desc, exits = {}, items = [], mobs = [] )
@@ -93,8 +92,11 @@ class Locations(object):
             print("You must supply a vlaid area to remove a mob from")
             return
         
-        # Remove the mob from the location
-        self.areas[key]["mobs"].remove(mob)
+        # Get this locations mob
+        local_mob = self.get_mob(mob)
+
+        # Remove the mob from the location#
+        self.areas[key]["mobs"].remove(local_mob)
         return
 
     def has_mob(self, key, mob):
@@ -177,6 +179,15 @@ class Locations(object):
         else:
             print("You did not find anything")
         print()
+
+    def get_mob(self, name):
+        
+        # Loop through the mobs and return the first one found
+        for mob in self.areas[self.area]["mobs"]:
+            if mob.name.lower() == name:
+                return mob
+        
+        return False
 
 # Create an instance of the Locations class
 world = Locations()
