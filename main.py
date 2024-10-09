@@ -1,4 +1,5 @@
 from Locations import *
+from Bag import *
 
 # TODO
 # - Ability to collect and spend money
@@ -7,18 +8,22 @@ from Locations import *
 # - Add more items
 # - Create a game class and object
 # - Create a player class and object
-# - Create a mob class and objects
 # Ideas ( Inspiration from Zork ):
 # - Attack things with the command attack <mob> with <weapon> ( Have no slots, just has to be in your bag )
 # - To give an item to something use give <item> to <something>
 # - Other directions aside from north, south, east and west can be up, down
 # - A room can have objects which can be interacted with, perhaps a new room etc or a chest with loot inside
 
+# ##########################
+# Objects
+# ##########################
+bag = Bag()
+
 # Attacks the specified monster
 def attack(item, mob):
     
     # Check the weapon actually exists
-    if(isItemInBag(item)):
+    if(bag.exists(item)):
         # Is the item a weapon?
         if item.type == "weapon":
             print("You successfully attack {0} with a {1}".format(mob.name, item.name))
@@ -79,18 +84,10 @@ def process_cmd(command):
             world.describe()
             return
         case "take":
-            player_bag.append(world.take_item(cmds[1]))
+            bag.add(world.take_item(cmds[1]))
             return
         case "inventory":
-            if len(player_bag) > 0:
-                print("You are carrying the following items:")
-                # Dispay the contents
-                for item in player_bag:
-                    print(item.name)
-                print()
-            else:
-                print("You currently have no items in your bag.")
-            return
+            bag.display()
         case "drop":
 
              # Check if an item has been specified
@@ -98,16 +95,14 @@ def process_cmd(command):
                 print("You must supply the name of an item you wish to drop")
             else:
                 # Are we carrying that item in the bag?
-                for item in player_bag:
-                    if item.name == cmds[1]:
-                        # Remove the item
-                        player_bag.remove(item)
-                        # Add to the areas list
-                        world.add_item(location, item)
-                        return
-                    else:
-                        print("You are not carrying that item so you can't drop it")
-                        return
+                if bag.contains(cmds[1]):
+                    print("Found")
+
+                    # Remove the item from the bag and add it to the current location items stash
+                    world.add_item(location, bag.remove(cmds[1]))
+                else:
+                    print("You are not carrying that item so you can't drop it")
+
 
         case "equip":
             # Equip the item
@@ -125,7 +120,7 @@ def process_cmd(command):
                 print("You must specify the monster you wish to attack")
             else:
                 # Attack the specified monster
-                fight_mob(location, cmds[1])
+                fight_mob(location, cmds[1], "Television")
 
         case "search":
             # Search the area for any goodies
@@ -188,8 +183,11 @@ def help():
 # Equip an item to the character to be used
 def equip_item(item, slot):
 
+    print(item)
+    print(slot)
+
     # Check if we have the item first
-    if item not in player_bag:
+    if not isItemInBag(item):
         print("You can only equip an item you have placed in your bag")
         return
     
@@ -242,6 +240,9 @@ def fight_mob(area, mob, item):
         else:
             print("You attemped to fight the {0} without a weapon. You were defeated. Game Over".format(mob))
             running = False
+    else:
+        print("This location has no mobs to fight")
+        print()
 
 def show_slots():
 
