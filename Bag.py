@@ -5,11 +5,11 @@ class Bag(object):
         self.size = 0
 
     # Checks if an item is in the bag
-    def contains(self, item):
+    def contains(self, name):
 
         for bagItem in self.items:
             
-            if bagItem.name == item.name:
+            if bagItem.name == name:
                 return True
             else: 
                 return False
@@ -27,10 +27,12 @@ class Bag(object):
             return
         
     # Removes an item from the bag
-    def remove(self, item):
+    def remove(self, name):
 
         # Check to ensure the item is not already in the bag
-        if self.contains(item):
+        if self.contains(name):
+            # Get a copy of the item we wish to remove
+            item = self.getItem(name)
             self.items.remove(item)
             self.size -= 1
             return item
@@ -46,3 +48,10 @@ class Bag(object):
         for item in self.items:
             print(item.name)
 
+    # Gets the actual item based on it's name
+    def getItem(self, name):
+
+        for item in self.items:
+            if item.name == name:
+                return item
+        
