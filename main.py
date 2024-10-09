@@ -187,20 +187,18 @@ def equip_item(item, slot):
     print(slot)
 
     # Check if we have the item first
-    if not isItemInBag(item):
+    if not bag.contains(item):
         print("You can only equip an item you have placed in your bag")
         return
+    
     
     # Check if the slot for the player is available
     if slot not in player_slots:
         print("The player does not have a slot matching that description")
         return
     
-    # Equip the item
-    player_slots[slot] = item
-
-    # remove the item from your bag
-    player_bag.remove(item)
+    # Equip the item and remove it from your bag
+    player_slots[slot] = bag.remove(item)
     return
 
 def unequip_item(item, slot):
