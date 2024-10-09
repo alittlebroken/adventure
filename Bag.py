@@ -11,13 +11,13 @@ class Bag(object):
             
             if bagItem.name == name:
                 return True
-            else: 
-                return False
+            
+        return False
 
     # Adds an item to the bag
     def add(self, item):
         
-        # Check to ensure the itrm is not already in the bag
+        # Check to ensure the item is not already in the bag
         if self.contains(item):
             print("You can only have one of those items in the bag at a time")
             return
