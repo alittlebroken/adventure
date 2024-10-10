@@ -34,20 +34,6 @@ def attack(item, mob):
         else:
             print("You can't attack with a {0}".format(item.name))
             return
-    
-
-# Check the players bag to see if an item Exists
-def isItemInBag(item):
-
-    # Do we have any items in the players bag?
-    if len(player_bag) > 0:
-        for bagItem in player_bag:
-            if bagItem == item:
-                return True
-            else:
-                return False
-    else:
-        return False
 
 # Process commands entered by the player
 def process_cmd(command):
@@ -145,9 +131,6 @@ running = True
 
 # Stores the location we are currently in
 location = "start"
-
-# The players bag for any items they pick up
-player_bag = []
 
 # The slots for a player
 player_slots = { 
