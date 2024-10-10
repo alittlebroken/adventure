@@ -181,10 +181,10 @@ def help():
     print()
 
 # Equip an item to the character to be used
-def equip_item(item, slot):
+def equip_item(name, slot):
 
     # Check if we have the item first
-    if not bag.contains(item):
+    if not bag.contains(name):
         print("You can only equip an item you have placed in your bag")
         return
     
@@ -194,7 +194,9 @@ def equip_item(item, slot):
         return
     
     # Equip the item and remove it from your bag
-    player_slots[slot] = bag.remove(item)
+    player_slots[slot] = bag.getItem(name)
+    bag.remove(name)
+    print("You have equipped the {0}".format(player_slots[slot].name))
     return
 
 def unequip_item(item, slot):
