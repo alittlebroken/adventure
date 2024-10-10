@@ -94,7 +94,7 @@ class Locations(object):
         
         # Get this locations mob
         local_mob = self.get_mob(mob)
-
+        print(local_mob)
         # Remove the mob from the location#
         self.areas[key]["mobs"].remove(local_mob)
         return
@@ -112,7 +112,7 @@ class Locations(object):
 
             # Check each mob and see if it matches the passed in mob name
             for areaMob in self.areas[key]["mobs"]:
-                if areaMob.name.lower() == mob:
+                if areaMob.name.lower() == mob.lower():
                     return True
                 else:
                     return False
