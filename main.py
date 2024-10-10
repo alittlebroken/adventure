@@ -207,15 +207,18 @@ def unequip_item(item, slot):
         return
     
     # Check if the slot has that item equipped
-    if player_slots[slot] != item:
+    if player_slots[slot].name != item:
         print("You do no have that item equipped in that slot")
         return
     
+    # Take a cop of the item bneing unequipped
+    localItem = player_slots[slot]
+
     # Remove the item from the slot
     player_slots[slot] = None
 
     # Place the item back into the players bag
-    player_bag.append(item)
+    bag.add(localItem)
 
     # Display a message to the user
     print("You have unequipped {0} and placed it back into your bag".format(item))
